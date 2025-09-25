@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M&L Home Builds - Invoice Template</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 15px;
+            line-height: 1.3;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo img {
+            max-width: 130%;
+            max-height: 130%;
+            border-radius: 10%;
+            object-fit: contain;
+        }
+
+        .company-name {
+            font-size: 36px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .tagline {
+            color: #e74c3c;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .invoice-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-date {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-info h3, .date-info h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .contact-info div, .date-info div {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .date-info input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .items-table th {
+            background: #f39c12;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .items-table td {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .items-table tr:nth-child(even) {
+            background: #fef9e7;
+        }
+
+        .items-table input, .items-table select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .number-input {
+            text-align: right;
+        }
+
+        .total-cell {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .grand-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .grand-total-amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .thank-you {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .best-regards {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .invoice-container {
+                padding: 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .company-name {
+                font-size: 24px;
+            }
+            
+            .contact-date {
+                flex-direction: column;
+            }
+            
+            .items-table {
+                font-size: 12px;
+            }
+            
+            .items-table th, .items-table td {
+                padding: 8px 5px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .controls {
+                display: none;
+            }
+            
+            .invoice-container {
+                box-shadow: none;
+                max-width: none;
+                padding: 15px;
+            }
+            
+            .header {
+                margin-bottom: 20px;
+            }
+            
+            .invoice-title {
+                margin-bottom: 15px;
+                font-size: 20px;
+            }
+            
+            .contact-date {
+                margin-bottom: 15px;
+            }
+            
+            .items-table {
+                margin-bottom: 15px;
+            }
+            
+            .items-table tr:nth-child(even) {
+                background: #fef9e7 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .items-table tr:nth-child(odd) {
+                background: white !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .grand-total {
+                margin: 15px 0;
+            }
+            
+            .footer {
+                margin-top: 20px;
+            }
+            
+            .thank-you {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+            
+            .items-table input::placeholder {
+                color: transparent;
+            }
+            
+            .items-table input:placeholder-shown {
+                color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="controls">
+            <button class="btn" onclick="addRow()">Add Row</button>
+            <button class="btn" onclick="window.print()">Print/Save PDF</button>
+        </div>
+
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="1.png" alt="M&L Logo">
+                </div>
+                <div>
+                    <div class="company-name">M&L</div>
+                    <div class="tagline">HOME BUILDS AND RENOVATION</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-title">Preliminary valuation</div>
+
+        <div class="contact-date">
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <div>+353 89 491 4444</div>
+                <div>office@mlrenovations.ie</div>
+                <div>www.mlrenovations.ie</div>
+            </div>
+            <div class="date-info">
+                <h3>Date Issued</h3>
+                <input type="date" id="dateIssued" />
+            </div>
+        </div>
+
+        <table class="items-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%">No.</th>
+                    <th style="width: 40%">Individual jobs</th>
+                    <th style="width: 15%">Qty/m2</th>
+                    <th style="width: 15%">Price</th>
+                    <th style="width: 20%">Total</th>
+                </tr>
+            </thead>
+            <tbody id="itemsBody">
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" placeholder="e.g. Roof" /></td>
+                    <td><input type="number" class="number-input qty" placeholder="135" oninput="calculateRow(this)" /></td>
+                    <td><input type="number" class="number-input price" placeholder="95" step="0.01" oninput="calculateRow(this)" /></td>
+                    <td class="total-cell">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="grand-total">
+            <div><strong>Term and condition</strong></div>
+            <div>
+                <strong>Grand Total</strong>
+                <div class="grand-total-amount">€<span id="grandTotal">0</span></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="thank-you">THANK YOU</div>
+            <div class="best-regards">
+                Best Regards<br>
+                M&L Home Builds and Renovation
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set today's date by default
+        document.getElementById('dateIssued').value = new Date().toISOString().split('T')[0];
+
+        function calculateRow(input) {
+            const row = input.closest('tr');
+            const qty = parseFloat(row.querySelector('.qty').value) || 0;
+            const price = parseFloat(row.querySelector('.price').value) || 0;
+            const total = qty * price;
+            
+            row.querySelector('.total-cell').textContent = total.toFixed(2);
+            calculateGrandTotal();
+        }
+
+        function calculateGrandTotal() {
+            const totals = document.querySelectorAll('.total-cell');
+            let grandTotal = 0;
+            
+            totals.forEach(cell => {
+                grandTotal += parseFloat(cell.textContent) || 0;
+            });
+            
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
+
+        function addRow() {
+            const tbody = document.getElementById('itemsBody');
+            const rowCount = tbody.children.length + 1;
+            
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${rowCount}</td>
+                <td><input type="text" placeholder="Description" /></td>
+                <td><input type="number" class="number-input qty" placeholder="0" oninput="calculateRow(this)" /></td>
+                <td><input type="number" class="number-input price" placeholder="0" step="0.01" oninput="calculateRow(this)" /></td>
+                <td class="total-cell">0</td>
+            `;
+            
+            tbody.appendChild(newRow);
+        }
+    </script>
+</body>
+</html>
